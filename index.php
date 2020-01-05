@@ -5,7 +5,7 @@ class User {
 
     // properties
     // public, protected, private
-    private $username;
+    protected $username;
     private $email = "email@dinustech.com";
 
     // constructor
@@ -44,24 +44,39 @@ class User {
     }
 }
 
+class UserAdmin extends User {
+
+    private $email_admin;
+
+    // overriding methods
+    public function __construct($username, $email, $email_admin) {
+        $this->email_admin = $email_admin;
+        parent::__construct($username, $email);
+    }
+
+    public function getEmailAdmin() {
+        return $this->email_admin;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+}
+
 // inisiasi
-$userSatu = new User("angger", "angger@dinustech.com");
-$userDua = new User("adiq", "adiq@dinustech.com");
+// $userSatu = new User("angger", "angger@dinustech.com");
+// $userDua = new User("adiq", "adiq@dinustech.com");
 
-echo $userSatu
-    ->setUsername('angger123')
-    ->setEmail('angger123@dinustech.com')
-    ->addFriend("siddiq");
+// echo $userSatu->addFriend("siddiq").'<br>';
+// echo $userDua->addFriend("siddiq").'<br>';
 
-// chaining method
-// $data = \DB::table('pdam_portal')
-//     ->where('email', 'angger@dinustech.com')
-//     ->where('username', 'angger')
-//     ->first();
+$userAdmin = new UserAdmin("admin", "admin@dinustech.com", "emailadmin@dinustech.com");
 
-// $data->where('email', 'angger@dinustech.com');
-// $data->where('username', 'angger');
-// $data->first();
+echo $userAdmin->addFriend("siddiq").'<br>';
+echo "Username: ".$userAdmin->getUsername().'<br>';
+echo "Email: ".$userAdmin->getEmail().'<br>';
+echo "Email Admin: ".$userAdmin->getEmailAdmin().'<br>';
+
 ?>
 
 <html>
