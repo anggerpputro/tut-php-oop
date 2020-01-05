@@ -7,7 +7,6 @@ class User {
     // public, protected, private
     private $username;
     private $email = "email@dinustech.com";
-    private $tanggal_resign;
 
     // constructor
     public function __construct($username, $email) {
@@ -18,6 +17,7 @@ class User {
     // setter
     public function setUsername($username) {
         $this->username = $username;
+        return $this;
     }
 
     public function setEmail($email) {
@@ -26,10 +26,7 @@ class User {
         } else {
             $this->email = "GOBLOK!";
         }
-    }
-
-    public function setTanggalResign($tanggal_resign) {
-        $this->tanggal_resign = $tanggal_resign;
+        return $this;
     }
 
     // getter
@@ -41,22 +38,9 @@ class User {
         return $this->email;
     }
 
-    public function getTanggalResign() {
-        return $this->formatTanggalResign();
-    }
-
     // methods
     public function addFriend($friend) {
         return $this->username."(".$this->email.") add new friend: ".$friend;
-    }
-
-
-    private function formatTanggalResign() {
-        if( empty($this->tanggal_resign) ) {
-            return $this->username.": Belum Resign!";
-        } else {
-            return $this->username.": Tanggal Resign: ".$this->tanggal_resign;
-        }
     }
 }
 
@@ -64,25 +48,20 @@ class User {
 $userSatu = new User("angger", "angger@dinustech.com");
 $userDua = new User("adiq", "adiq@dinustech.com");
 
-// panggil setter
-$userSatu->setTanggalResign("01 Desember 2019"); 
+echo $userSatu
+    ->setUsername('angger123')
+    ->setEmail('angger123@dinustech.com')
+    ->addFriend("siddiq");
 
-// ngisi property
-// $userSatu->username = "angger";
-// $userDua->username = "adiq";
+// chaining method
+// $data = \DB::table('pdam_portal')
+//     ->where('email', 'angger@dinustech.com')
+//     ->where('username', 'angger')
+//     ->first();
 
-// $userSatu->email = "angger@dinustech.com";
-
-// panggil method
-echo $userSatu->addFriend("siddiq")."<br>";
-echo $userDua->addFriend("siddiq")."<br>";
-
-echo "<hr>";
-
-// panggil getter
-echo $userSatu->getTanggalResign()."<br>";
-echo $userDua->getTanggalResign()."<br>";
-
+// $data->where('email', 'angger@dinustech.com');
+// $data->where('username', 'angger');
+// $data->first();
 ?>
 
 <html>
